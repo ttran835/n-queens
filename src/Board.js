@@ -108,12 +108,23 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var total = 0; 
+      //iterate through the keys of the obj;
+      for (var key in this.attributes) {
+        //iterate through the column index of obj[key];
+        if (typeof this.attributes[key][colIndex] === 'number') {
+          total += this.attributes[key][colIndex];
+        }
+      }
+      if (total > 1 ) {
+        return true;
+      }
+      return false; 
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+     
     },
 
 

@@ -39,7 +39,7 @@ window.findNRooksSolution = function(n) {
         }
         if (rookCounter === n) {
           solution = board.rows();
-          console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
+          // console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
           return solution;
         }
       }
@@ -56,6 +56,8 @@ window.findNRooksSolution = function(n) {
 
   //n is going to create new board; 
 
+  //need to iterate through the board; 
+
 */
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0; 
@@ -68,30 +70,35 @@ window.countNRooksSolutions = function(n) {
   var recurse = function (row) {
     //set row to be either the row or start at 0;
     row = row || 0;
-    var rookCount = 0;
+    // console.log('row should be increasing, ',row);
     //increase solution count if there are many rook as there are row;
     if (row === n) {
-      solutionCount++; 
+      solutionCount += 1; 
+      // console.log('increase when row is = n ',solutionCount)
+      // console.log('line 94 ',newBoard.rows());
     } else { 
     //if not, we set first rook at row (0) & i (0); and check && set the rook; 
     //iterate thru based on n'
-    for (var i = 0; i < n; i++) {
-      newBoard.togglePiece(row, i);
-        //if no collision, we set a piece there.
-        if (!newBoard.hasAnyRowConflicts() || !newBoard.hasAnyColConflicts()) {
-        //we increase the row and now it becomes row(1) & i (1)
-         recurse(row + 1);
-        } else {}
-        //if there is not, we set rook, else, we toggle off; 
+      // newBoard.togglePiece(row, 0);
+      for (let i = 0; i < n; i++) {
+        //set first piece;
+        // console.log('should be going thru the board ,',row, i);
         newBoard.togglePiece(row, i);
+        //check for collision; 
+          //if !collision => set piece; then increase row. 
+        if (!newBoard.hasAnyRowConflicts(i) && !newBoard.hasAnyColConflicts(i)) {
+          // newBoard.togglePiece(row, i);
+          recurse(row + 1);
+          newBoard.togglePiece(row, i);
+        } else {
+          newBoard.togglePiece(row, i);
+        }
+          
+      //if there is not, we set rook, else, we toggle off; 
+      // newBoard.togglePiece(row, i);
       }
     }
-  };
-    //loop through each col based on the size of n; meaning collum should be a set var; 
-      //we always know in rook, n will always === # of rooks; 
-      //if n === numberOfRook => ?!?!? (missing base); 
-
-
+  } 
   recurse(); 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;

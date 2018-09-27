@@ -51,13 +51,15 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 /*
-  use continue after for loop
-  Need to figure out if there is a toggleAll off function
-    after, start at the next location, but need to iterate through it.
+  create storage: this would have to loop through multiple, runTime would be shit; 
+  We need to call and create new Board(); 
 
 */
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 1; 
+  //we know that if                    
+
+
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;

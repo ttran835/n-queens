@@ -54,13 +54,45 @@ window.findNRooksSolution = function(n) {
   create storage: this would have to loop through multiple, runTime would be shit; 
   We need to call and create new Board(); 
 
+  //n is going to create new board; 
+
 */
 window.countNRooksSolutions = function(n) {
-  var solutionCount = 1; 
-  //we know that if                    
+  var solutionCount = 0; 
+  //set new board to work with; 
+  var newBoard = new Board({'n': n});
+  //We know that we need to iterate through each row and col to get the answer
+  //create new function for recurse;
+    //what argument should it take in. 
+      //we are trying to recurse throught the row and the col; 
+  var recurse = function (row) {
+    //set row to be either the row or start at 0;
+    row = row || 0;
+    var rookCount = 0;
+    //increase solution count if there are many rook as there are row;
+    if (row === n) {
+      solutionCount++; 
+    } else { 
+    //if not, we set first rook at row (0) & i (0); and check && set the rook; 
+    //iterate thru based on n'
+    for (var i = 0; i < n; i++) {
+      newBoard.togglePiece(row, i);
+        //if no collision, we set a piece there.
+        if (!newBoard.hasAnyRowConflicts() || !newBoard.hasAnyColConflicts()) {
+        //we increase the row and now it becomes row(1) & i (1)
+         recurse(row + 1);
+        } else {}
+        //if there is not, we set rook, else, we toggle off; 
+        newBoard.togglePiece(row, i);
+      }
+    }
+  };
+    //loop through each col based on the size of n; meaning collum should be a set var; 
+      //we always know in rook, n will always === # of rooks; 
+      //if n === numberOfRook => ?!?!? (missing base); 
 
 
-
+  recurse(); 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };

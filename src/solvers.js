@@ -45,8 +45,8 @@ window.findNRooksSolution = function(n) {
       }
     }
   }
-    //check if has row conflict or col conflict
-    // if yes, remove 0,
+  //check if has row conflict or col conflict
+  // if yes, remove 0,
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other

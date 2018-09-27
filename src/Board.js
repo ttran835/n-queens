@@ -80,7 +80,6 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       var total = 0;
-      console.log(this.attributes[rowIndex]);
       for (var i = 0; i < this.get('n'); i++) {
         total += this.attributes[rowIndex][i];
       }

@@ -22,7 +22,24 @@
 //also use board.hasAnyColConflicts(); 
 // else conflict remove rook; 
 //if !conflict => rookCounter +=1; 
-
+// window.recurse = function (row, n) {
+//   var solutionCount = 0;
+//   var newBoard = new Board({'n': n});
+//   if (row === n) {
+//     solutionCount += 1; 
+ 
+//   } else {
+//     for (let i = 0; i < n; i++) {
+//       newBoard.togglePiece(row, i)
+//       if (!newBoard.hasAnyRowConflicts(i) && !newBoard.hasAnyColConflicts(i)) {
+//         recurse(row + 1);
+//         newBoard.togglePiece(row, i);
+//       } else {
+//         newBoard.togglePiece(row, i);
+//       }
+//     }
+//   }
+// }
 
 window.findNRooksSolution = function(n) {
   var board = new Board({'n': n});
@@ -69,7 +86,6 @@ window.countNRooksSolutions = function(n) {
       //we are trying to recurse throught the row and the col; 
   var recurse = function (row) {
     //set row to be either the row or start at 0;
-    row = row || 0;
     // console.log('row should be increasing, ',row);
     //increase solution count if there are many rook as there are row;
     if (row === n) {
@@ -98,7 +114,8 @@ window.countNRooksSolutions = function(n) {
       }
     }
   } 
-  recurse(); 
+  recurse(0);
+  // solutionCount = recurse(0); 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
@@ -114,6 +131,7 @@ window.findNQueensSolution = function(n) {
     if (Array.isArray(board.attributes[key])) {
       for (var i = 0; i < n; i++) {
         board.togglePiece(key, i);
+        console.log(board.rows());
         if (!board.hasAnyQueensConflicts()) {
           numQueens += 1;
         } else {
